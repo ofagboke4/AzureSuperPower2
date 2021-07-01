@@ -1,0 +1,25 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'dbaspconnect'
+    subscriptionId: '94a681b3-f5dc-4469-ac73-ac45fc813a71'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'PowerShellstrg'
+    location: 'East US'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/ofagboke4/AzureSuperPower2/main/CreateWebApp/azuredeploy.json'
+    csmParametersFileLink: '-projectName AzureSuperPowers2'
+    deploymentMode: 'Incremental'
+    deploymentName: 'DeployPipelineTemplate'
+
+pool:
+  vmImage: ubuntu-latest
+
+
